@@ -1,17 +1,17 @@
 /*
- * btm222_module.c
+ * serial_module.c
  *
  *  Created on: 15.03.2014
  *      Author: Konstantin
  */
 
-#include "btm222_module.h"
+#include "serial_module.h"
 #include "lpc17xx_libcfg.h"
 
 #include "lpc17xx_uart.h"
 #include "lpc17xx_pinsel.h"
 
-#if (BTM222_UART_PORT==0)
+#if (SERIAL_UART_PORT==0)
 	#define UART_PORT	LPC_UART0
 	#define UARTx_IRQn  UART0_IRQn
 	#define UARTx_IRQHandler UART0_IRQHandler
@@ -24,13 +24,13 @@
 	#define UART_RXD_PIN	3
 	#define UART_RXD_FUNC	1
 
-#elif (BTM222_UART_PORT==1)
+#elif (SERIAL_UART_PORT==1)
 	#define UART_PORT	LPC_UART1
 	#define UARTx_IRQn  UART1_IRQn
 	#define UARTx_IRQHandler UART1_IRQHandler
 
-	#define UART_TXD_PORT	BTM222_TXD_PORT
-	#define UART_TXD_PIN	BTM222_TXD_PIN
+	#define UART_TXD_PORT	SERIAL_TXD_PORT
+	#define UART_TXD_PIN	SERIAL_TXD_PIN
 
 	#if (UART_TXD_PORT == 0)
 		#define	UART_TXD_FUNC	1
@@ -38,8 +38,8 @@
 		#define UART_TXD_FUNC	2
 	#endif
 
-	#define UART_RXD_PORT	BTM222_RXD_PORT
-	#define UART_RXD_PIN	BTM222_RXD_PIN
+	#define UART_RXD_PORT	SERIAL_RXD_PORT
+	#define UART_RXD_PIN	SERIAL_RXD_PIN
 
 	#if (UART_RXD_PORT == 0)
 		#define	UART_TXD_FUNC	1
@@ -47,13 +47,13 @@
 		#define UART_TXD_FUNC	2
 	#endif
 
-#elif (BTM222_UART_PORT==2)
+#elif (SERIAL_UART_PORT==2)
 	#define UART_PORT	LPC_UART2
 	#define UARTx_IRQn  UART2_IRQn
 	#define UARTx_IRQHandler UART2_IRQHandler
 
-	#define UART_TXD_PORT	BTM222_TXD_PORT
-	#define UART_TXD_PIN	BTM222_TXD_PIN
+	#define UART_TXD_PORT	SERIAL_TXD_PORT
+	#define UART_TXD_PIN	SERIAL_TXD_PIN
 
 	#if (UART_TXD_PORT == 0)
 		#define	UART_TXD_FUNC	1
@@ -61,8 +61,8 @@
 		#define UART_TXD_FUNC	2
 	#endif
 
-	#define UART_RXD_PORT	BTM222_RXD_PORT
-	#define UART_RXD_PIN	BTM222_RXD_PIN
+	#define UART_RXD_PORT	SERIAL_RXD_PORT
+	#define UART_RXD_PIN	SERIAL_RXD_PIN
 
 	#if (UART_RXD_PORT == 0)
 		#define	UART_RXD_FUNC	1
@@ -70,13 +70,13 @@
 		#define UART_RXD_FUNC	2
 	#endif
 
-#elif (BTM222_UART_PORT==3)
+#elif (SERIAL_UART_PORT==3)
 	#define UART_PORT	LPC_UART3
 	#define UARTx_IRQn  UART3_IRQn
 	#define UARTx_IRQHandler UART3_IRQHandler
 
-	#define UART_TXD_PORT	BTM222_TXD_PORT
-	#define UART_TXD_PIN	BTM222_TXD_PIN
+	#define UART_TXD_PORT	SERIAL_TXD_PORT
+	#define UART_TXD_PIN	SERIAL_TXD_PIN
 
 	#if (UART_TXD_PORT == 0)
 	# if (UART_TXD_PIN == 0)
@@ -88,8 +88,8 @@
 		#define UART_TXD_FUNC	3
 	#endif
 
-	#define UART_RXD_PORT	BTM222_RXD_PORT
-	#define UART_RXD_PIN	BTM222_RXD_PIN
+	#define UART_RXD_PORT	SERIAL_RXD_PORT
+	#define UART_RXD_PIN	SERIAL_RXD_PIN
 
 	#if (UART_RXD_PORT == 0)
 	# if (UART_RXD_PIN == 1)
@@ -122,14 +122,14 @@
 #define LSR_TEMT	0x40
 #define LSR_RXFE	0x80
 
-volatile uint32_t btm222_uart_status;
-volatile uint8_t btm222_uart_txempty = 1;
-volatile uint8_t btm222_uart_buffer[BTM222_BUFSIZE];
-volatile uint32_t btm222_uart_count = 0;
+volatile uint32_t serial_uart_status;
+volatile uint8_t serial_uart_txempty = 1;
+volatile uint8_t serial_uart_buffer[SERIAL_BUFSIZE];
+volatile uint32_t serial_uart_count = 0;
 
 uint8_t echo = 0;
 
-void btm222_init(uint32_t baud_rate)
+void serial_init(uint32_t baud_rate)
 {
 	UART_CFG_Type UART_config;
 	UART_FIFO_CFG_Type UART_fifo_config;
@@ -178,45 +178,92 @@ void btm222_init(uint32_t baud_rate)
 	NVIC_EnableIRQ(UARTx_IRQn);
 }
 
-void btm222_enableEcho(void)
+void serial_enableEcho(void)
 {
 	echo = 1;
 }
 
-void btm222_disableEcho(void)
+void serial_disableEcho(void)
 {
 	echo = 0;
 }
 
-inline void btm222_send(const uint8_t *buf, uint32_t buflen)
-{
-	UART_Send((LPC_UART_TypeDef *)UART_PORT, buf, buflen, BLOCKING);
-}
-
-inline uint32_t btm222_receive(uint8_t *buf, uint32_t buflen)
+inline uint32_t serial_receive(uint8_t *buf, uint32_t buflen)
 {
 	return UART_Receive((LPC_UART_TypeDef *)UART_PORT, buf, buflen, BLOCKING);
 }
 
-inline void btm222_putc(uint8_t c)
+void serial_putc(const uint8_t c)
 {
-	UART_Send((LPC_UART_TypeDef *)UART_PORT, &c, 1, BLOCKING);
+	uint32_t time_out = UART_BLOCKING_TIMEOUT;
+
+	while (!(UART_PORT->LSR & UART_LSR_THRE))
+	{
+		if (time_out == 0) break;
+		time_out--;
+	}
+	// Time out!
+	if(time_out == 0) return;
+
+	// Send byte
+	UART_PORT->THR = c;
 }
 
-void btm222_puts(const void *str)
+void serial_puts(const void *str)
 {
-	uint8_t *s = (uint8_t *) str;
+	const uint8_t *s = (uint8_t *) str;
+
+	uint32_t time_out, fifo_cnt;
 
 	while (*s)
 	{
-		btm222_putc(*s++);
+		time_out = UART_BLOCKING_TIMEOUT;
+
+		while (!(UART_PORT->LSR & UART_LSR_THRE))	// Wait for THR empty with timeout
+		{
+			if (time_out == 0) break;
+			time_out--;
+		}
+
+		if (time_out == 0) break;	// Timeout occurred
+
+		fifo_cnt = UART_TX_FIFO_SIZE;
+
+		while (fifo_cnt && *s)
+		{
+			UART_PORT->THR = *(s++);
+			fifo_cnt--;
+		}
 	}
 }
 
-inline void btm222_puts_(const void *str)
+void serial_send(const void *buf, uint32_t size)
 {
-	btm222_puts(str);
-	btm222_puts("\r\n");
+	uint32_t time_out, fifo_cnt;
+
+	const uint8_t *s = (uint8_t *) buf;
+
+	while (size)
+	{
+		time_out = UART_BLOCKING_TIMEOUT;
+
+		while (!(UART_PORT->LSR & UART_LSR_THRE))	// Wait for THR empty with timeout
+		{
+			if (time_out == 0) break;
+			time_out--;
+		}
+
+		if (time_out == 0) break;	// Timeout occurred
+
+		fifo_cnt = UART_TX_FIFO_SIZE;
+
+		while (fifo_cnt && size)
+		{
+			UART_PORT->THR = *(s++);
+			fifo_cnt--;
+			size--;
+		}
+	}
 }
 
 void UARTx_IRQHandler (void)
@@ -237,7 +284,7 @@ void UARTx_IRQHandler (void)
 		{
 			/* There are errors or break interrupt */
 			/* Read LSR will clear the interrupt */
-			btm222_uart_status = LSRValue;
+			serial_uart_status = LSRValue;
 			tmp = UART_PORT->RBR;		/* Dummy read on RX to clear interrupt, then bail out */
 			return;
 		}
@@ -250,15 +297,15 @@ void UARTx_IRQHandler (void)
 
 			if (echo)
 			{
-				UART_Send((LPC_UART_TypeDef *)UART_PORT, &tmp, 1, BLOCKING);
+				serial_putc(tmp);
 			} else
 			{
-				btm222_uart_buffer[btm222_uart_count] = tmp;
-				btm222_uart_count++;
+				serial_uart_buffer[serial_uart_count] = tmp;
+				serial_uart_count++;
 
-				if (btm222_uart_count == BTM222_BUFSIZE)
+				if (serial_uart_count == SERIAL_BUFSIZE)
 				{
-					btm222_uart_count = 0;
+					serial_uart_count = 0;
 				}
 			}
 		}
@@ -272,19 +319,19 @@ void UARTx_IRQHandler (void)
 			UART_Send((LPC_UART_TypeDef *)UART_PORT, &tmp, 1, BLOCKING);
 		} else
 		{
-			btm222_uart_buffer[btm222_uart_count] = tmp;
-			btm222_uart_count++;
+			serial_uart_buffer[serial_uart_count] = tmp;
+			serial_uart_count++;
 
-			if (btm222_uart_count == BTM222_BUFSIZE)
+			if (serial_uart_count == SERIAL_BUFSIZE)
 			{
-				btm222_uart_count = 0;
+				serial_uart_count = 0;
 			}
 		}
 	}
 	else if (IIRValue == IIR_CTI)	/* Character timeout indicator */
 	{
 		// Bit 9 as the CTI error
-		btm222_uart_status |= 0x100;
+		serial_uart_status |= 0x100;
 	}
 	else if (IIRValue == IIR_THRE)	/* THRE, transmit holding register empty */
 	{
@@ -293,11 +340,11 @@ void UARTx_IRQHandler (void)
 		LSRValue = UART_PORT->LSR;
 		if ( LSRValue & LSR_THRE )
 		{
-			btm222_uart_txempty = 1;
+			serial_uart_txempty = 1;
 		}
 		else
 		{
-			btm222_uart_txempty = 0;
+			serial_uart_txempty = 0;
 		}
 	}
 }

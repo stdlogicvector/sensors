@@ -80,7 +80,7 @@ typedef struct
 	const char * name;			// Name of the Measurement (e.g. 'Acceleration')
 	const uint8_t ranges;		// Number of Ranges
 	const range_t range[4];		// Ranges of the Measurement (e.g. -8g to +8g)
-	const uint8_t duration;		// Duration of Measurement in Milliseconds
+	const uint16_t duration;	// Duration of Measurement in Milliseconds
 	const uint8_t size;			// Number of Values
 	const type_t type;			// Type of the Measurement (e.g. floating point)
 	const unit_t unit;			// Unit of the Measurement (e.g. METER^1 * SECOND^-2)
