@@ -80,6 +80,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_mpu6050 =
 {
+		.type = ACCELERATION,
 		.name = "IMU",
 		.part = "MPU6050",
 
@@ -99,16 +100,15 @@ const sensor_t sensor_mpu6050 =
 					},
 				.duration = 1,
 				.size	= 3,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "g",
-						.symbol = "g",
+						.symbol = "a",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = METER,  .exponent = +1 },
-								{ .dimension = SECOND, .exponent = -2 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = METER,  .exponent = +1 },
+								{ .baseunit = SECOND, .exponent = -2 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			},
@@ -124,16 +124,15 @@ const sensor_t sensor_mpu6050 =
 					},
 				.duration = 1,
 				.size	= 3,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "\xB0/s",
 						.symbol = "\xB0/s",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = DEGREE, .exponent = +1 },
-								{ .dimension = SECOND, .exponent = -1 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = DEGREE, .exponent = +1 },
+								{ .baseunit = SECOND, .exponent = -1 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			},
@@ -149,16 +148,15 @@ const sensor_t sensor_mpu6050 =
 					},
 				.duration = 1,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Celsius",
 						.symbol = "\xB0\x43",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KELVIN, .exponent = +1 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = KELVIN, .exponent = +1 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			}

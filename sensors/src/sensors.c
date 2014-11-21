@@ -15,9 +15,10 @@ void sensor_cmd(char cmd, uint8_t *args);
 void handleUnknownCommand(char cmd);
 void handleIdentify();
 void handleGetNoOfSensors();
-void handleGetSensorInfo(uint8_t sensorId);
-void handleGetMeasurementInfo(uint8_t sensorId, uint8_t measurementId);
+void handleGetSensor(uint8_t sensorId);
+void handleGetNoOfMeasurements(uint8_t sensorId);
 void handleGetMeasurement(uint8_t sensorId, uint8_t measurementId);
+void handleGetValue(uint8_t sensorId, uint8_t measurementId);
 void handleSetSensorRange(uint8_t sensorId, uint8_t measurementId, uint8_t range);
 void handleSetSensorOff(uint8_t sensorId);
 void handleSetSensorOn(uint8_t sensorId);
@@ -83,9 +84,10 @@ void sensor_cmd(char cmd, uint8_t *args)
 	{
 	case CMD_IDENTIFY:				handleIdentify(); break;
 	case CMD_GET_NO_SENSORS:		handleGetNoOfSensors(); break;
-	case CMD_GET_SENSOR_INFO:		handleGetSensorInfo(args[0]);	break;
-	case CMD_GET_SENSOR_MEAS_INFO:	handleGetMeasurementInfo(args[0], args[1]); break;
+	case CMD_GET_SENSOR:			handleGetSensor(args[0]); break;
+	case CMD_GET_NO_MEAS:			handleGetNoOfMeasurements(args[0]); break;
 	case CMD_GET_SENSOR_MEAS:		handleGetMeasurement(args[0], args[1]); break;
+	case CMD_GET_SENSOR_VALUE:		handleGetValue(args[0], args[1]); break;
 	case CMD_SET_SENSOR_RANGE:		handleSetSensorRange(args[0], args[1], args[2]); break;
 	case CMD_SET_SENSOR_OFF:		handleSetSensorOff(args[0]); break;
 	case CMD_SET_SENSOR_ON:			handleSetSensorOn(args[0]); break;
@@ -129,26 +131,42 @@ void handleGetNoOfSensors()
 	serial_putc(OBJECT_END);
 }
 
-void handleGetSensorInfo(uint8_t sensorId)
+void handleGetSensor(uint8_t sensorId)
 {
 	if (sensorId < no_of_sensors_)
 	{
 		serial_putc(OBJECT_START);
-		serial_putc(CMD_GET_SENSOR_INFO);
+		serial_putc(CMD_GET_SENSOR);
 		serial_putc(DELIMITER);
 		serial_putc('0' + sensorId);
 		serial_putc(DELIMITER);
 
+		serial_putc('0' + (uint8_t) sensors_[sensorId]->type);
+		serial_putc(DELIMITER);
 		serial_puts(sensors_[sensorId]->name);
 		serial_putc(DELIMITER);
 		serial_puts(sensors_[sensorId]->part);
+		serial_putc(OBJECT_END);
+	}
+}
+
+
+void handleGetNoOfMeasurements(uint8_t sensorId)
+{
+	if (sensorId < no_of_sensors_)
+	{
+		serial_putc(OBJECT_START);
+		serial_putc(CMD_GET_NO_MEAS);
 		serial_putc(DELIMITER);
+		serial_putc('0' + sensorId);
+		serial_putc(DELIMITER);
+
 		serial_putc('0' + sensors_[sensorId]->no_of_measurements);
 		serial_putc(OBJECT_END);
 	}
 }
 
-void handleGetMeasurementInfo(uint8_t sensorId, uint8_t measurementId)
+void handleGetMeasurement(uint8_t sensorId, uint8_t measurementId)
 {
 	uint8_t r;
 	char unitstring[20];
@@ -158,49 +176,46 @@ void handleGetMeasurementInfo(uint8_t sensorId, uint8_t measurementId)
 		make_unit_string(&(sensors_[sensorId]->measurements[measurementId].unit), unitstring);
 
 		serial_putc(OBJECT_START);
-		serial_putc(CMD_GET_SENSOR_MEAS_INFO);
+		serial_putc(CMD_GET_SENSOR_MEAS);	// 0
 		serial_putc(DELIMITER);
-		serial_putc('0' + sensorId);
+		serial_putc('0' + sensorId);			// 1
 		serial_putc(DELIMITER);
-		serial_putc('0' + measurementId);
-		serial_putc(DELIMITER);
-
-		serial_puts(sensors_[sensorId]->measurements[measurementId].name);
+		serial_putc('0' + measurementId);		// 2
 		serial_putc(DELIMITER);
 
-		send_encoded(sensors_[sensorId]->measurements[measurementId].duration);
+		serial_puts(sensors_[sensorId]->measurements[measurementId].name);				// 3
+		serial_putc(DELIMITER);
+		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].size);	// 4
+		serial_putc(DELIMITER);
+		send_encoded(sensors_[sensorId]->measurements[measurementId].duration);			// 5
+		serial_putc(DELIMITER);
 
+		serial_puts(sensors_[sensorId]->measurements[measurementId].unit.name);			// 6
 		serial_putc(DELIMITER);
-		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].type);
+		serial_puts(sensors_[sensorId]->measurements[measurementId].unit.symbol);		// 7
 		serial_putc(DELIMITER);
-		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].size);
+		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].unit.prefix);	// 8
 		serial_putc(DELIMITER);
+		serial_send((uint8_t*)unitstring, 20);											// 9
+		serial_putc(DELIMITER);
+
 		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].ranges);
-		serial_putc(DELIMITER);
 
 		for (r = 0; r < sensors_[sensorId]->measurements[measurementId].ranges; r++)
 		{
+			serial_putc(DELIMITER);
 			send_encoded(sensors_[sensorId]->measurements[measurementId].range[r].min.u_int);
 			serial_putc(DELIMITER);
 			send_encoded(sensors_[sensorId]->measurements[measurementId].range[r].max.u_int);
 			serial_putc(DELIMITER);
 			serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].range[r].digits);
-			serial_putc(DELIMITER);
 		}
-
-		serial_puts(sensors_[sensorId]->measurements[measurementId].unit.name);
-		serial_putc(DELIMITER);
-		serial_puts(sensors_[sensorId]->measurements[measurementId].unit.symbol);
-		serial_putc(DELIMITER);
-		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].unit.prefix);
-		serial_putc(DELIMITER);
-		serial_send((uint8_t*)unitstring, 20);
 
 		serial_putc(OBJECT_END);
 	}
 }
 
-void handleGetMeasurement(uint8_t sensorId, uint8_t measurementId)
+void handleGetValue(uint8_t sensorId, uint8_t measurementId)
 {
 	uint8_t v;
 
@@ -269,12 +284,12 @@ void make_unit_string(const unit_t *unit, char *unit_string)
 
 	for (i = 0; i < 4; i++)
 	{
-		unit_string[i*5+0] = '0' + unit->baseunits[i].dimension;
+		unit_string[i*5+0] = '0' + unit->baseunits[i].baseunit;
 		unit_string[i*5+1] = '^';
 
 		if (unit->baseunits[i].exponent >= 0)
 		{
-			unit_string[i*5+2] = '+';
+			unit_string[i*5+2] = ' ';
 			unit_string[i*5+3] = '0' + (unit->baseunits[i].exponent % 10);
 		}
 		else

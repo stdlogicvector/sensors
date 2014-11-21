@@ -37,6 +37,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_adc =
 {
+		.type = ADC,
 		.name = "AD Converter",
 		.part = "LPC1768",
 
@@ -56,16 +57,15 @@ const sensor_t sensor_adc =
 					},
 				.duration = 1,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Volt",
 						.symbol = "V",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KILOGRAM,.exponent = +1 },
-								{ .dimension = METER,   .exponent = +2 },
-								{ .dimension = SECOND,  .exponent = -3 },
-								{ .dimension = AMPERE,  .exponent = -1 }
+								{ .baseunit = KILOGRAM,.exponent = +1 },
+								{ .baseunit = METER,   .exponent = +2 },
+								{ .baseunit = SECOND,  .exponent = -3 },
+								{ .baseunit = AMPERE,  .exponent = -1 }
 							}
 					}
 			},
@@ -81,16 +81,15 @@ const sensor_t sensor_adc =
 					},
 				.duration = 1,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Volt",
 						.symbol = "V",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KILOGRAM,.exponent = +1 },
-								{ .dimension = METER,   .exponent = +2 },
-								{ .dimension = SECOND,  .exponent = -3 },
-								{ .dimension = AMPERE,  .exponent = -1 }
+								{ .baseunit = KILOGRAM,.exponent = +1 },
+								{ .baseunit = METER,   .exponent = +2 },
+								{ .baseunit = SECOND,  .exponent = -3 },
+								{ .baseunit = AMPERE,  .exponent = -1 }
 							}
 					}
 			},
@@ -106,16 +105,15 @@ const sensor_t sensor_adc =
 					},
 				.duration = 1,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Volt",
 						.symbol = "V",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KILOGRAM,.exponent = +1 },
-								{ .dimension = METER,   .exponent = +2 },
-								{ .dimension = SECOND,  .exponent = -3 },
-								{ .dimension = AMPERE,  .exponent = -1 }
+								{ .baseunit = KILOGRAM,.exponent = +1 },
+								{ .baseunit = METER,   .exponent = +2 },
+								{ .baseunit = SECOND,  .exponent = -3 },
+								{ .baseunit = AMPERE,  .exponent = -1 }
 							}
 					}
 			},
@@ -131,16 +129,15 @@ const sensor_t sensor_adc =
 					},
 				.duration = 1,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Volt",
 						.symbol = "V",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KILOGRAM,.exponent = +1 },
-								{ .dimension = METER,   .exponent = +2 },
-								{ .dimension = SECOND,  .exponent = -3 },
-								{ .dimension = AMPERE,  .exponent = -1 }
+								{ .baseunit = KILOGRAM,.exponent = +1 },
+								{ .baseunit = METER,   .exponent = +2 },
+								{ .baseunit = SECOND,  .exponent = -3 },
+								{ .baseunit = AMPERE,  .exponent = -1 }
 							}
 					}
 			},
@@ -156,16 +153,15 @@ const sensor_t sensor_adc =
 					},
 				.duration = 1,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Volt",
 						.symbol = "V",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KILOGRAM,.exponent = +1 },
-								{ .dimension = METER,   .exponent = +2 },
-								{ .dimension = SECOND,  .exponent = -3 },
-								{ .dimension = AMPERE,  .exponent = -1 }
+								{ .baseunit = KILOGRAM,.exponent = +1 },
+								{ .baseunit = METER,   .exponent = +2 },
+								{ .baseunit = SECOND,  .exponent = -3 },
+								{ .baseunit = AMPERE,  .exponent = -1 }
 							}
 					}
 			},
@@ -181,16 +177,15 @@ const sensor_t sensor_adc =
 					},
 				.duration = 1,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Volt",
 						.symbol = "V",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KILOGRAM,.exponent = +1 },
-								{ .dimension = METER,   .exponent = +2 },
-								{ .dimension = SECOND,  .exponent = -3 },
-								{ .dimension = AMPERE,  .exponent = -1 }
+								{ .baseunit = KILOGRAM,.exponent = +1 },
+								{ .baseunit = METER,   .exponent = +2 },
+								{ .baseunit = SECOND,  .exponent = -3 },
+								{ .baseunit = AMPERE,  .exponent = -1 }
 							}
 					}
 			}/*,
@@ -206,16 +201,15 @@ const sensor_t sensor_adc =
 					},
 				.duration = 1,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Volt",
 						.symbol = "V",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KILOGRAM,.exponent = +1 },
-								{ .dimension = METER,   .exponent = +2 },
-								{ .dimension = SECOND,  .exponent = -3 },
-								{ .dimension = AMPERE,  .exponent = -1 }
+								{ .baseunit = KILOGRAM,.exponent = +1 },
+								{ .baseunit = METER,   .exponent = +2 },
+								{ .baseunit = SECOND,  .exponent = -3 },
+								{ .baseunit = AMPERE,  .exponent = -1 }
 							}
 					}
 			},
@@ -231,16 +225,15 @@ const sensor_t sensor_adc =
 					},
 				.duration = 1,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Volt",
 						.symbol = "V",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KILOGRAM,.exponent = +1 },
-								{ .dimension = METER,   .exponent = +2 },
-								{ .dimension = SECOND,  .exponent = -3 },
-								{ .dimension = AMPERE,  .exponent = -1 }
+								{ .baseunit = KILOGRAM,.exponent = +1 },
+								{ .baseunit = METER,   .exponent = +2 },
+								{ .baseunit = SECOND,  .exponent = -3 },
+								{ .baseunit = AMPERE,  .exponent = -1 }
 							}
 					}
 			}

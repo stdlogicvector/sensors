@@ -111,6 +111,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_mlx90620 =
 {
+		.type = INFRARED,
 		.name = "16x4 IR Array",
 		.part = "MLX90620",
 
@@ -130,16 +131,15 @@ const sensor_t sensor_mlx90620 =
 					},
 				.duration = 100, // ?
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Celsius",
 						.symbol = "\xB0\x43",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KELVIN, .exponent = +1 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = KELVIN, .exponent = +1 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			},
@@ -155,16 +155,15 @@ const sensor_t sensor_mlx90620 =
 					},
 				.duration = 100, // ?
 				.size	= 64,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Celsius",
 						.symbol = "\xB0\x43",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KELVIN, .exponent = +1 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = KELVIN, .exponent = +1 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			}

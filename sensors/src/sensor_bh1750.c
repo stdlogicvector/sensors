@@ -59,6 +59,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_bh1750 =
 {
+		.type = LIGHT,
 		.name = "Light Sensor",
 		.part = "BH1750",
 
@@ -78,16 +79,15 @@ const sensor_t sensor_bh1750 =
 					},
 				.duration = 120,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Lux",
 						.symbol = "lx",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = CANDELA,.exponent = +1 },
-								{ .dimension = METER,  .exponent = -2 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = CANDELA,.exponent = +1 },
+								{ .baseunit = METER,  .exponent = -2 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			}

@@ -13,7 +13,6 @@
 #define OBJECT_START	'{'
 #define OBJECT_END		'}'
 #define DELIMITER		'|'
-#define SEPARATOR		'~'
 
 typedef enum {
 	CMD_NO_CMD 				 = 0,
@@ -21,17 +20,18 @@ typedef enum {
 	CMD_IDENTIFY			 = '@',
 
 	CMD_GET_NO_SENSORS  	 = 'a',
-	CMD_GET_SENSOR_INFO 	 = 'b',
-	CMD_GET_SENSOR_MEAS_INFO = 'c',
-	CMD_GET_SENSOR_MEAS      = 'd',
-	CMD_SET_SENSOR_RANGE	 = 'e',
-	CMD_SET_SENSOR_OFF  	 = 'f',
-	CMD_SET_SENSOR_ON   	 = 'g',
+	CMD_GET_SENSOR		 	 = 'b',
+	CMD_GET_NO_MEAS			 = 'c',
+	CMD_GET_SENSOR_MEAS		 = 'd',
+	CMD_GET_SENSOR_VALUE     = 'e',
+	CMD_SET_SENSOR_RANGE	 = 'f',
+	CMD_SET_SENSOR_OFF  	 = 'g',
+	CMD_SET_SENSOR_ON   	 = 'h',
 
 	CMD_GET_NO_ACTORS	  	 = 'A',
-	CMD_GET_ACTOR_INFO 		 = 'B',
-	CMD_GET_ACTOR_ACTN_INFO	 = 'C',
-	CMD_SET_ACTOR_ACTN 	     = 'D',
+	CMD_GET_ACTOR	 		 = 'B',
+	CMD_GET_ACTOR_ACTION	 = 'C',
+	CMD_SET_ACTOR_ACTION     = 'D',
 
 	CMD_SET_ACTOR_OFF  	 	 = 'F',
 	CMD_SET_ACTOR_ON   	 	 = 'G',

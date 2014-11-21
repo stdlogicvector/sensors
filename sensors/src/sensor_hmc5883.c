@@ -58,6 +58,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_hmc5883 =
 {
+		.type = MAGNETIC,
 		.name = "Magnetometer",
 		.part = "HMC5883",
 
@@ -77,16 +78,15 @@ const sensor_t sensor_hmc5883 =
 					},
 				.duration = 7,
 				.size	= 3,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Tesla",
 						.symbol = "T",
 						.prefix = MICRO,
 						.baseunits = {
-								{ .dimension = KILOGRAM, .exponent = +1 },
-								{ .dimension = SECOND,   .exponent = -2 },
-								{ .dimension = AMPERE,   .exponent = -1 },
-								{ .dimension = NONE,     .exponent = +0 }
+								{ .baseunit = KILOGRAM, .exponent = +1 },
+								{ .baseunit = SECOND,   .exponent = -2 },
+								{ .baseunit = AMPERE,   .exponent = -1 },
+								{ .baseunit = NONE,     .exponent = +0 }
 						}
 				}
 			}

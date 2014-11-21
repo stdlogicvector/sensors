@@ -49,6 +49,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_sht21 =
 {
+		.type = HUMIDITY,
 		.name = "Humidity Sensor",
 		.part = "SHT21",
 
@@ -68,16 +69,15 @@ const sensor_t sensor_sht21 =
 					},
 				.duration = 40,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Relative Humidity",
 						.symbol = "%RH",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = NONE,   .exponent = +1 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = NONE,   .exponent = +1 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			},
@@ -93,16 +93,15 @@ const sensor_t sensor_sht21 =
 					},
 				.duration = 95,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Celsius",
 						.symbol = "\xB0\x43",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KELVIN, .exponent = +1 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = KELVIN, .exponent = +1 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			}

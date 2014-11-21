@@ -54,6 +54,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_tcs3472 =
 {
+		.type = COLOR,
 		.name = "Color Sensor",
 		.part = "TCS3472",
 
@@ -70,16 +71,15 @@ const sensor_t sensor_tcs3472 =
 					},
 				.duration = 100,
 				.size	= 3,
-				.type   = TYPE_UINT16,
 				.unit   = {
 						.name = "Count",
 						.symbol = "c",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = NONE, .exponent = +1 },
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 }
+								{ .baseunit = NONE, .exponent = +1 },
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 }
 							}
 					}
 			},
@@ -92,16 +92,15 @@ const sensor_t sensor_tcs3472 =
 					},
 				.duration = 100,
 				.size	= 1,
-				.type   = TYPE_UINT16,
 				.unit   = {
 						.name = "Count",
 						.symbol = "c",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = NONE, .exponent = +1 },
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 }
+								{ .baseunit = NONE, .exponent = +1 },
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 }
 							}
 					}
 			}

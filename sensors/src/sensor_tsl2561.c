@@ -30,7 +30,7 @@ static uint8_t channel[6] = {0, 1, 2, 5, 6, 7};
 
 static int32_t selectCh(int8_t ch);
 static int32_t writeReg(uint8_t reg, uint8_t data);
-static int32_t readData(uint16_t *vis, uint16_t *ir);
+static int32_t readData(float *vis, float *ir);
 
 // ----------------------------------------------------------------------------
 
@@ -53,6 +53,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_tsl2561 =
 {
+		.type = POLARISATION,
 		.name = "Polarization Sensor",
 		.part = "TSL2561",
 
@@ -69,16 +70,15 @@ const sensor_t sensor_tsl2561 =
 					},
 				.duration = 100,
 				.size	= 2,
-				.type   = TYPE_UINT16,
 				.unit   = {
 						.name = "Lux",
 						.symbol = "lx",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = CANDELA,.exponent = +1 },
-								{ .dimension = METER,  .exponent = -2 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = CANDELA,.exponent = +1 },
+								{ .baseunit = METER,  .exponent = -2 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			},
@@ -91,16 +91,15 @@ const sensor_t sensor_tsl2561 =
 					},
 				.duration = 100,
 				.size	= 2,
-				.type   = TYPE_UINT16,
 				.unit   = {
 						.name = "Lux",
 						.symbol = "lx",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = CANDELA,.exponent = +1 },
-								{ .dimension = METER,  .exponent = -2 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = CANDELA,.exponent = +1 },
+								{ .baseunit = METER,  .exponent = -2 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			},
@@ -113,16 +112,15 @@ const sensor_t sensor_tsl2561 =
 					},
 				.duration = 100,
 				.size	= 2,
-				.type   = TYPE_UINT16,
 				.unit   = {
 						.name = "Lux",
 						.symbol = "lx",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = CANDELA,.exponent = +1 },
-								{ .dimension = METER,  .exponent = -2 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = CANDELA,.exponent = +1 },
+								{ .baseunit = METER,  .exponent = -2 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			},
@@ -135,16 +133,15 @@ const sensor_t sensor_tsl2561 =
 					},
 				.duration = 100,
 				.size	= 2,
-				.type   = TYPE_UINT16,
 				.unit   = {
 						.name = "Lux",
 						.symbol = "lx",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = CANDELA,.exponent = +1 },
-								{ .dimension = METER,  .exponent = -2 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = CANDELA,.exponent = +1 },
+								{ .baseunit = METER,  .exponent = -2 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			},
@@ -157,16 +154,15 @@ const sensor_t sensor_tsl2561 =
 					},
 				.duration = 100,
 				.size	= 2,
-				.type   = TYPE_UINT16,
 				.unit   = {
 						.name = "Lux",
 						.symbol = "lx",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = CANDELA,.exponent = +1 },
-								{ .dimension = METER,  .exponent = -2 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = CANDELA,.exponent = +1 },
+								{ .baseunit = METER,  .exponent = -2 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			},
@@ -179,16 +175,15 @@ const sensor_t sensor_tsl2561 =
 					},
 				.duration = 100,
 				.size	= 2,
-				.type   = TYPE_UINT16,
 				.unit   = {
 						.name = "Lux",
 						.symbol = "lx",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = CANDELA,.exponent = +1 },
-								{ .dimension = METER,  .exponent = -2 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = CANDELA,.exponent = +1 },
+								{ .baseunit = METER,  .exponent = -2 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			}
@@ -265,7 +260,7 @@ static uint8_t get_measurement_(uint8_t num)
 	{
 		selectCh(channel[num]);
 
-		readData((uint16_t*) &value_[0].u_int, (uint16_t*) &value_[1].u_int);
+		readData(&value_[0].flt, &value_[1].flt);
 
 		selectCh(-1);
 
@@ -320,7 +315,7 @@ static int32_t writeReg(uint8_t reg, uint8_t data)
 // 0x1112
 // 0x6302
 
-static int32_t readData(uint16_t *vis, uint16_t *ir)
+static int32_t readData(float *vis, float *ir)
 {
 	uint8_t data[4];
 	uint8_t cmd = 0x9C;
@@ -333,8 +328,8 @@ static int32_t readData(uint16_t *vis, uint16_t *ir)
 
 	if (I2C_MasterTransferData(I2C_DEV, &i2c, I2C_TRANSFER_POLLING) == SUCCESS)
 	{
-		*vis = (data[1] << 8) + data[0];
-		*ir  = (data[3] << 8) + data[2];
+		*vis = (float) ((data[1] << 8) + data[0]);
+		*ir  = (float) ((data[3] << 8) + data[2]);
 
 		return 0;
 	}

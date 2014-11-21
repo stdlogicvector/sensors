@@ -34,7 +34,29 @@ typedef enum {	NONE     = 0,
 				MOLE,
 				CANDELA,
 				DEGREE
-			} dimension_t;
+			} baseunit_t;
+
+typedef enum {	GENERIC = 0,
+				ACCELERATION,
+				ADC,
+				AUDIO,
+				COMPASS,
+				COLOR,
+//				CURRENT,
+				DISTANCE,
+				GAS,
+				HUMIDITY,
+				INFRARED,
+				LIGHT,
+				MAGNETIC,
+//				MOTION,
+				POLARISATION,
+				PRESSURE,
+				ROTATION,
+				RADIATION,
+//				SPECTRAL,
+				TEMPERATURE
+} sensortype_t;
 
 typedef enum {  TYPE_FLOAT = 0,
 				TYPE_UINT8,
@@ -48,7 +70,7 @@ typedef enum {  TYPE_FLOAT = 0,
 
 typedef struct
 {
-	dimension_t dimension;
+	baseunit_t baseunit;
 	int8_t exponent;
 } subunit_t;
 
@@ -63,9 +85,7 @@ typedef struct
 typedef union
 {
 	float flt;
-	int32_t s_int;
 	uint32_t u_int;
-	char byte[4];
 } value_t;
 
 typedef struct
@@ -82,7 +102,6 @@ typedef struct
 	const range_t range[4];		// Ranges of the Measurement (e.g. -8g to +8g)
 	const uint16_t duration;	// Duration of Measurement in Milliseconds
 	const uint8_t size;			// Number of Values
-	const type_t type;			// Type of the Measurement (e.g. floating point)
 	const unit_t unit;			// Unit of the Measurement (e.g. METER^1 * SECOND^-2)
 } measurement_t;
 
@@ -91,12 +110,13 @@ typedef struct
 	const char * name;
 	const range_t range;
 	const uint8_t size;
-	const type_t type;
 	const unit_t unit;
 } action_t;
 
 typedef struct
 {
+	const sensortype_t type;
+
 	const char * name;
 	const char * part;
 

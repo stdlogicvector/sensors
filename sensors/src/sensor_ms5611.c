@@ -62,6 +62,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_ms5611 =
 {
+		.type = PRESSURE,
 		.name = "Barometer",
 		.part = "MS5611",
 
@@ -81,16 +82,15 @@ const sensor_t sensor_ms5611 =
 					},
 				.duration = 10,
 				.size	= 1,
-				.type   = TYPE_INT32,
 				.unit   = {
 						.name = "Pascal",
 						.symbol = "pa",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KILOGRAM,.exponent = +1 },
-								{ .dimension = METER,   .exponent = -1 },
-								{ .dimension = SECOND,  .exponent = -2 },
-								{ .dimension = NONE,    .exponent = +0 }
+								{ .baseunit = KILOGRAM,.exponent = +1 },
+								{ .baseunit = METER,   .exponent = -1 },
+								{ .baseunit = SECOND,  .exponent = -2 },
+								{ .baseunit = NONE,    .exponent = +0 }
 							}
 					}
 			},
@@ -106,16 +106,15 @@ const sensor_t sensor_ms5611 =
 					},
 				.duration = 10,
 				.size	= 1,
-				.type   = TYPE_FLOAT,
 				.unit   = {
 						.name = "Celsius",
 						.symbol = "\xB0\x43",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = KELVIN,  .exponent = +1 },
-								{ .dimension = NONE,    .exponent = +0 },
-								{ .dimension = NONE,    .exponent = +0 },
-								{ .dimension = NONE,    .exponent = +0 }
+								{ .baseunit = KELVIN,  .exponent = +1 },
+								{ .baseunit = NONE,    .exponent = +0 },
+								{ .baseunit = NONE,    .exponent = +0 },
+								{ .baseunit = NONE,    .exponent = +0 }
 							}
 					}
 			}
@@ -195,7 +194,7 @@ static uint8_t get_measurement_(uint8_t num)
 		}
 
 		if (num == 0)
-			value_[0].s_int = calcPressure(d1, d2);
+			value_[0].flt = (float) calcPressure(d1, d2);
 		else
 			value_[0].flt = calcTemperature(d2) / 100.0f;
 
