@@ -176,7 +176,7 @@ void handleGetMeasurement(uint8_t sensorId, uint8_t measurementId)
 		make_unit_string(&(sensors_[sensorId]->measurements[measurementId].unit), unitstring);
 
 		serial_putc(OBJECT_START);
-		serial_putc(CMD_GET_SENSOR_MEAS);	// 0
+		serial_putc(CMD_GET_SENSOR_MEAS);		// 0
 		serial_putc(DELIMITER);
 		serial_putc('0' + sensorId);			// 1
 		serial_putc(DELIMITER);

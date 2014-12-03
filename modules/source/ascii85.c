@@ -14,7 +14,7 @@ uint32_t ascii85_decode(ascii85_t data)
 	uint32_t m = 1;
 	uint32_t result = 0;
 
-	for (i = 4; i--;)
+	for (i = 5; i--;)
 	{
 		result += (data.b[i] - 33) * m;
 		m *= 85;
@@ -28,7 +28,7 @@ ascii85_t ascii85_encode(uint32_t data)
     uint8_t i;
     ascii85_t a;
 
-    for (i = 4; i--;)
+    for (i = 5; i--;)
     {
         a.b[i] = (data % 85) + 33;
         data  /= 85;

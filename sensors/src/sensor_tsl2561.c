@@ -66,7 +66,7 @@ const sensor_t sensor_tsl2561 =
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.u_int = 0, .max.u_int = 0xFFFF, .digits = 0 }
+						{ .min.flt = 0, .max.flt = 2E16 - 1, .digits = 0 }
 					},
 				.duration = 100,
 				.size	= 2,
@@ -87,7 +87,7 @@ const sensor_t sensor_tsl2561 =
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.u_int = 0, .max.u_int = 0xFFFF, .digits = 0 }
+						{ .min.flt = 0, .max.flt = 2E16 - 1, .digits = 0 }
 					},
 				.duration = 100,
 				.size	= 2,
@@ -108,7 +108,7 @@ const sensor_t sensor_tsl2561 =
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.u_int = 0, .max.u_int = 0xFFFF, .digits = 0 }
+						{ .min.flt = 0, .max.flt = 2E16 - 1, .digits = 0 }
 					},
 				.duration = 100,
 				.size	= 2,
@@ -129,7 +129,7 @@ const sensor_t sensor_tsl2561 =
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.u_int = 0, .max.u_int = 0xFFFF, .digits = 0 }
+						{ .min.flt = 0, .max.flt = 2E16 - 1, .digits = 0 }
 					},
 				.duration = 100,
 				.size	= 2,
@@ -150,7 +150,7 @@ const sensor_t sensor_tsl2561 =
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.u_int = 0, .max.u_int = 0xFFFF, .digits = 0 }
+						{ .min.flt = 0, .max.flt = 2E16 - 1, .digits = 0 }
 					},
 				.duration = 100,
 				.size	= 2,
@@ -171,7 +171,7 @@ const sensor_t sensor_tsl2561 =
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.u_int = 0, .max.u_int = 0xFFFF, .digits = 0 }
+						{ .min.flt = 0, .max.flt = 2E16 - 1, .digits = 0 }
 					},
 				.duration = 100,
 				.size	= 2,
