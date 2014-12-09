@@ -75,10 +75,10 @@ const sensor_t sensor_ms5611 =
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.u_int = 1000, .max.u_int = 120000, .digits = 0 },
-						{ .min.u_int =    0, .max.u_int =      0, .digits = 0 },
-						{ .min.u_int =    0, .max.u_int =      0, .digits = 0 },
-						{ .min.u_int =    0, .max.u_int =      0, .digits = 0 }
+						{ .min.flt = 1000, .max.flt = 120000, .digits = 0 },
+						{ .min.flt =    0, .max.flt =      0, .digits = 0 },
+						{ .min.flt =    0, .max.flt =      0, .digits = 0 },
+						{ .min.flt =    0, .max.flt =      0, .digits = 0 }
 					},
 				.duration = 10,
 				.size	= 1,

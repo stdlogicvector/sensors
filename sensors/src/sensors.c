@@ -224,7 +224,7 @@ void handleGetValue(uint8_t sensorId, uint8_t measurementId)
 		sensors_[sensorId]->get_measurement(measurementId);
 
 		serial_putc(OBJECT_START);
-		serial_putc(CMD_GET_SENSOR_MEAS);
+		serial_putc(CMD_GET_SENSOR_VALUE);
 		serial_putc(DELIMITER);
 		serial_putc('0' + sensorId);
 		serial_putc(DELIMITER);
