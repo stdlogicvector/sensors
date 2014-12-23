@@ -53,7 +53,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_tsl2561 =
 {
-		.type = POLARISATION,
+		.type = SENSOR_POLARISATION,
 		.name = "Polarization Sensor",
 		.part = "TSL2561",
 
@@ -63,6 +63,7 @@ const sensor_t sensor_tsl2561 =
 		{
 			{
 				.name   = "Unpolarized",
+				.type	= BRIGHTNESS,
 				.ranges = 1,
 				.range  =
 					{
@@ -84,6 +85,7 @@ const sensor_t sensor_tsl2561 =
 			},
 			{
 				.name   = "Linear 0\xB0",
+				.type	= BRIGHTNESS,
 				.ranges = 1,
 				.range  =
 					{
@@ -105,6 +107,7 @@ const sensor_t sensor_tsl2561 =
 			},
 			{
 				.name   = "Linear 45\xB0",
+				.type	= BRIGHTNESS,
 				.ranges = 1,
 				.range  =
 					{
@@ -126,6 +129,7 @@ const sensor_t sensor_tsl2561 =
 			},
 			{
 				.name   = "Linear 90\xB0",
+				.type	= BRIGHTNESS,
 				.ranges = 1,
 				.range  =
 					{
@@ -147,6 +151,7 @@ const sensor_t sensor_tsl2561 =
 			},
 			{
 				.name   = "Circular R",
+				.type	= BRIGHTNESS,
 				.ranges = 1,
 				.range  =
 					{
@@ -168,6 +173,7 @@ const sensor_t sensor_tsl2561 =
 			},
 			{
 				.name   = "Circular L",
+				.type	= BRIGHTNESS,
 				.ranges = 1,
 				.range  =
 					{

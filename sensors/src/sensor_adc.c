@@ -37,7 +37,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_adc =
 {
-		.type = ADC,
+		.type = SENSOR_ADC,
 		.name = "AD Converter",
 		.part = "LPC1768",
 
@@ -47,6 +47,7 @@ const sensor_t sensor_adc =
 		{
 			{
 				.name   = "Channel 1",
+				.type	= VOLTAGE,
 				.ranges = 1,
 				.range  =
 					{
@@ -71,6 +72,7 @@ const sensor_t sensor_adc =
 			},
 			{
 				.name   = "Channel 2",
+				.type	= VOLTAGE,
 				.ranges = 1,
 				.range  =
 					{
@@ -95,6 +97,7 @@ const sensor_t sensor_adc =
 			},
 			{
 				.name   = "Channel 3",
+				.type	= VOLTAGE,
 				.ranges = 1,
 				.range  =
 					{
@@ -119,6 +122,7 @@ const sensor_t sensor_adc =
 			},
 			{
 				.name   = "Channel 4",
+				.type	= VOLTAGE,
 				.ranges = 1,
 				.range  =
 					{
@@ -143,6 +147,7 @@ const sensor_t sensor_adc =
 			},
 			{
 				.name   = "Channel 5",
+				.type	= VOLTAGE,
 				.ranges = 1,
 				.range  =
 					{
@@ -167,6 +172,7 @@ const sensor_t sensor_adc =
 			},
 			{
 				.name   = "Channel 6",
+				.type	= VOLTAGE,
 				.ranges = 1,
 				.range  =
 					{
@@ -191,6 +197,7 @@ const sensor_t sensor_adc =
 			}/*,
 			{
 				.name   = "Channel 7",
+				.type	= VOLTAGE,
 				.ranges = 1,
 				.range  =
 					{
@@ -215,6 +222,7 @@ const sensor_t sensor_adc =
 			},
 			{
 				.name   = "Channel 8",
+				.type	= VOLTAGE,
 				.ranges = 1,
 				.range  =
 					{

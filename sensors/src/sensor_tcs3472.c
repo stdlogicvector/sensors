@@ -54,7 +54,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_tcs3472 =
 {
-		.type = COLOR,
+		.type = SENSOR_COLOR,
 		.name = "Color Sensor",
 		.part = "TCS3472",
 
@@ -64,10 +64,11 @@ const sensor_t sensor_tcs3472 =
 		{
 			{
 				.name   = "RGB",
+				.type	= COLOR,
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.u_int = 0, .max.u_int = 0xFFFF, .digits = 0 }
+						{ .min.flt = 0, .max.flt = 0xFFFF, .digits = 0 }
 					},
 				.duration = 100,
 				.size	= 3,
@@ -85,10 +86,11 @@ const sensor_t sensor_tcs3472 =
 			},
 			{
 				.name   = "White",
+				.type	= BRIGHTNESS,
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.u_int = 0, .max.u_int = 0xFFFF, .digits = 0 }
+						{ .min.flt = 0, .max.flt = 0xFFFF, .digits = 0 }
 					},
 				.duration = 100,
 				.size	= 1,

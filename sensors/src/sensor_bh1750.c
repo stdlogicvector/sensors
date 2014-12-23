@@ -59,7 +59,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_bh1750 =
 {
-		.type = LIGHT,
+		.type = SENSOR_LIGHT,
 		.name = "Light Sensor",
 		.part = "BH1750",
 
@@ -69,6 +69,7 @@ const sensor_t sensor_bh1750 =
 		{
 			{
 				.name   = "Illuminance",
+				.type	= BRIGHTNESS,
 				.ranges = 1,
 				.range  =
 					{

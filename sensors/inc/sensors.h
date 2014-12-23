@@ -36,37 +36,47 @@ typedef enum {	NONE     = 0,
 				DEGREE
 			} baseunit_t;
 
-typedef enum {	GENERIC = 0,
-				ACCELERATION,
-				ADC,
-				AUDIO,
-				COMPASS,
-				COLOR,
-//				CURRENT,
-				DISTANCE,
-				GAS,
-				HUMIDITY,
-				INFRARED,
-				LIGHT,
-				MAGNETIC,
-//				MOTION,
-				POLARISATION,
-				PRESSURE,
-				ROTATION,
-				RADIATION,
-//				SPECTRAL,
-				TEMPERATURE
+typedef enum {	SENSOR_GENERIC = 0,
+				SENSOR_ACCELERATION,
+				SENSOR_ADC,
+				SENSOR_AUDIO,
+				SENSOR_COMPASS,
+				SENSOR_COLOR,
+//				SENSOR_CURRENT,
+				SENSOR_DISTANCE,
+				SENSOR_GAS,
+				SENSOR_HUMIDITY,
+				SENSOR_INFRARED,
+				SENSOR_LIGHT,
+				SENSOR_MAGNETIC,
+//				SENSOR_MOTION,
+				SENSOR_POLARISATION,
+				SENSOR_PRESSURE,
+				SENSOR_ROTATION,
+				SENSOR_RADIATION,
+//				SENSOR_SPECTRAL,
+				SENSOR_TEMPERATURE
 } sensortype_t;
 
-typedef enum {  TYPE_FLOAT = 0,
-				TYPE_UINT8,
-				TYPE_UINT16,
-				TYPE_UINT32,
-				TYPE_INT8,
-				TYPE_INT16,
-				TYPE_INT32,
-				TYPE_BOOL
-			 } type_t;
+typedef enum {	GENERIC = 0,
+				ACCELERATION,
+				ANGLE,
+				ANGULAR_SPEED,
+				BRIGHTNESS,
+				COLOR,
+				CONCENTRATION,
+				COUNTS,
+				DIRECTION,
+				DISTANCE,
+				CURRENT,
+				FLUX,
+				FORCE,
+				HUMIDITY,
+				LOUDNESS,
+				TEMPERATURE,
+				VOLTAGE,
+				PRESSURE
+} measurementtype_t;
 
 typedef struct
 {
@@ -98,6 +108,7 @@ typedef struct
 typedef struct
 {
 	const char * name;			// Name of the Measurement (e.g. 'Acceleration')
+	const measurementtype_t type;
 	const uint8_t ranges;		// Number of Ranges
 	const range_t range[4];		// Ranges of the Measurement (e.g. -8g to +8g)
 	const uint16_t duration;	// Duration of Measurement in Milliseconds

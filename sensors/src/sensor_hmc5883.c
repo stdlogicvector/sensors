@@ -58,7 +58,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_hmc5883 =
 {
-		.type = MAGNETIC,
+		.type = SENSOR_MAGNETIC,
 		.name = "Magnetometer",
 		.part = "HMC5883",
 
@@ -68,6 +68,7 @@ const sensor_t sensor_hmc5883 =
 		{
 			{
 				.name   = "Flux Density Vector",
+				.type	= FLUX,
 				.ranges = 4,
 				.range  =
 					{

@@ -62,7 +62,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_ms5611 =
 {
-		.type = PRESSURE,
+		.type = SENSOR_PRESSURE,
 		.name = "Barometer",
 		.part = "MS5611",
 
@@ -72,6 +72,7 @@ const sensor_t sensor_ms5611 =
 		{
 			{
 				.name   = "Pressure",
+				.type	= PRESSURE,
 				.ranges = 1,
 				.range  =
 					{
@@ -96,6 +97,7 @@ const sensor_t sensor_ms5611 =
 			},
 			{
 				.name   = "Temperature",
+				.type	= TEMPERATURE,
 				.ranges = 1,
 				.range  =
 					{

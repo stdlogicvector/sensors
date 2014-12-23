@@ -185,18 +185,20 @@ void handleGetMeasurement(uint8_t sensorId, uint8_t measurementId)
 
 		serial_puts(sensors_[sensorId]->measurements[measurementId].name);				// 3
 		serial_putc(DELIMITER);
-		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].size);	// 4
+		serial_putc('0' + sensors_[sensorId]->measurements[measurementId].type);		// 4
 		serial_putc(DELIMITER);
-		send_encoded(sensors_[sensorId]->measurements[measurementId].duration);			// 5
+		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].size);	// 5
+		serial_putc(DELIMITER);
+		send_encoded(sensors_[sensorId]->measurements[measurementId].duration);			// 6
 		serial_putc(DELIMITER);
 
-		serial_puts(sensors_[sensorId]->measurements[measurementId].unit.name);			// 6
+		serial_puts(sensors_[sensorId]->measurements[measurementId].unit.name);			// 7
 		serial_putc(DELIMITER);
-		serial_puts(sensors_[sensorId]->measurements[measurementId].unit.symbol);		// 7
+		serial_puts(sensors_[sensorId]->measurements[measurementId].unit.symbol);		// 8
 		serial_putc(DELIMITER);
-		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].unit.prefix);	// 8
+		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].unit.prefix);	// 9
 		serial_putc(DELIMITER);
-		serial_send((uint8_t*)unitstring, 20);											// 9
+		serial_send((uint8_t*)unitstring, 20);											// 10
 		serial_putc(DELIMITER);
 
 		serial_putc('0' + (char)sensors_[sensorId]->measurements[measurementId].ranges);

@@ -33,6 +33,7 @@ const sensor_t sensor_template =
 {
 		.name = "sensor name",
 		.part = "sensor part",
+		.type = SENSOR_GENERIC,
 
 		.no_of_measurements = NO_OF_MEASUREMENTS,
 
@@ -40,26 +41,26 @@ const sensor_t sensor_template =
 		{
 			{
 				.name   = "Measurement",
+				.type	= GENERIC,
 				.ranges = 1,
 				.range  =
 					{
-						{ .min.s_int = -1000, .max.s_int = 1000, .digits = 0 },
-						{ .min.s_int =     0, .max.s_int =    0, .digits = 0 },
-						{ .min.s_int =     0, .max.s_int =    0, .digits = 0 },
-						{ .min.s_int =     0, .max.s_int =    0, .digits = 0 },
+						{ .min.flt = -1000, .max.flt = 1000, .digits = 0 },
+						{ .min.flt =     0, .max.flt =    0, .digits = 0 },
+						{ .min.flt =     0, .max.flt =    0, .digits = 0 },
+						{ .min.flt =     0, .max.flt =    0, .digits = 0 },
 					},
 				.duration = 100,
 				.size	= 1,
-				.type   = TYPE_INT16,
 				.unit   = {
 						.name = "Unit",
 						.symbol = "un",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = METER,  .exponent = +1 },
-								{ .dimension = SECOND, .exponent = -2 },
-								{ .dimension = NONE,   .exponent = +0 },
-								{ .dimension = NONE,   .exponent = +0 }
+								{ .baseunit = METER,  .exponent = +1 },
+								{ .baseunit = SECOND, .exponent = -2 },
+								{ .baseunit = NONE,   .exponent = +0 },
+								{ .baseunit = NONE,   .exponent = +0 }
 							}
 					}
 			}

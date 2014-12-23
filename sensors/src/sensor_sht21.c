@@ -49,7 +49,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_sht21 =
 {
-		.type = HUMIDITY,
+		.type = SENSOR_HUMIDITY,
 		.name = "Humidity Sensor",
 		.part = "SHT21",
 
@@ -59,6 +59,7 @@ const sensor_t sensor_sht21 =
 		{
 			{
 				.name   = "Humidity",
+				.type	= HUMIDITY,
 				.ranges = 1,
 				.range  =
 					{
@@ -70,7 +71,7 @@ const sensor_t sensor_sht21 =
 				.duration = 40,
 				.size	= 1,
 				.unit   = {
-						.name = "Relative Humidity",
+						.name = "Rel. Humidity",
 						.symbol = "%RH",
 						.prefix = NO_PREFIX,
 						.baseunits = {
@@ -83,6 +84,7 @@ const sensor_t sensor_sht21 =
 			},
 			{
 				.name   = "Temperature",
+				.type	= TEMPERATURE,
 				.ranges = 1,
 				.range  =
 					{

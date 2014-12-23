@@ -67,7 +67,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_mlx90614 =
 {
-		.type = INFRARED,
+		.type = SENSOR_INFRARED,
 		.name = "IR Thermometer",
 		.part = "MLX90614",
 
@@ -77,6 +77,7 @@ const sensor_t sensor_mlx90614 =
 		{
 			{
 				.name   = "Ambient Temperature",
+				.type	= TEMPERATURE,
 				.ranges = 1,
 				.range  =
 					{
@@ -101,6 +102,7 @@ const sensor_t sensor_mlx90614 =
 			},
 			{
 				.name   = "Object Temperature 1",
+				.type	= TEMPERATURE,
 				.ranges = 1,
 				.range  =
 					{
@@ -125,6 +127,7 @@ const sensor_t sensor_mlx90614 =
 			},
 			{
 				.name   = "Object Temperature 2",
+				.type	= TEMPERATURE,
 				.ranges = 1,
 				.range  =
 					{

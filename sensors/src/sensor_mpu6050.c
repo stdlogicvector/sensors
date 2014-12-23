@@ -80,7 +80,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_mpu6050 =
 {
-		.type = ACCELERATION,
+		.type = SENSOR_ACCELERATION,
 		.name = "IMU",
 		.part = "MPU6050",
 
@@ -90,6 +90,7 @@ const sensor_t sensor_mpu6050 =
 		{
 			{
 				.name   = "Acceleration Vector",
+				.type   = ACCELERATION,
 				.ranges = 4,
 				.range  =
 					{
@@ -114,6 +115,7 @@ const sensor_t sensor_mpu6050 =
 			},
 			{
 				.name   = "Angular Rate Vector",
+				.type	= ANGULAR_SPEED,
 				.ranges = 4,
 				.range  =
 					{
@@ -138,6 +140,7 @@ const sensor_t sensor_mpu6050 =
 			},
 			{
 				.name   = "Temperature",
+				.type	= TEMPERATURE,
 				.ranges = 1,
 				.range  =
 					{

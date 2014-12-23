@@ -36,16 +36,15 @@ const actor_t actor_leds =
 				.name  = "LED 1",
 				.range = { .min.u_int = 0, .max.u_int = 1, .digits = 0 },
 				.size  = 1,
-				.type  = TYPE_BOOL,
 				.unit   = {
 						.name = " ",
 						.symbol = " ",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 }
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 }
 							}
 					}
 			},
@@ -53,16 +52,15 @@ const actor_t actor_leds =
 				.name  = "LED 2",
 				.range = { .min.u_int = 0, .max.u_int = 1, .digits = 0 },
 				.size  = 1,
-				.type  = TYPE_BOOL,
 				.unit   = {
 						.name = " ",
 						.symbol = " ",
 						.prefix = NO_PREFIX,
 						.baseunits = {
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 },
-								{ .dimension = NONE, .exponent = +0 }
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 },
+								{ .baseunit = NONE, .exponent = +0 }
 							}
 					}
 			}

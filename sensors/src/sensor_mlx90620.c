@@ -111,7 +111,7 @@ static uint8_t range_[NO_OF_MEASUREMENTS] = {0};
 
 const sensor_t sensor_mlx90620 =
 {
-		.type = INFRARED,
+		.type = SENSOR_INFRARED,
 		.name = "16x4 IR Array",
 		.part = "MLX90620",
 
@@ -121,6 +121,7 @@ const sensor_t sensor_mlx90620 =
 		{
 			{
 				.name   = "Ambient Temperature",
+				.type	= TEMPERATURE,
 				.ranges = 1,
 				.range  =
 					{
@@ -145,6 +146,7 @@ const sensor_t sensor_mlx90620 =
 			},
 			{
 				.name   = "Pixel Temperature",
+				.type	= TEMPERATURE,
 				.ranges = 1,
 				.range  =
 					{
